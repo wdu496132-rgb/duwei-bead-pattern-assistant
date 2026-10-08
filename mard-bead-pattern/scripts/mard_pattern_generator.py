@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-MARD Bead Pattern Generator
+MARD Bead Pattern Generator - 拼豆小助手
 作者：杜维
-来源：https://github.com/jiahao31530-crypto/mard-bead-pattern-skill
+来源：https://github.com/wdu496132-rgb/duwei-bead-pattern-assistant
 """
 from __future__ import annotations
 
@@ -196,29 +196,34 @@ def input_files(args: argparse.Namespace) -> list[Path]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate MARD fuse-bead pattern sheets.")
-    parser.add_argument("--input", help="single image path")
-    parser.add_argument("--input-dir", help="directory of images")
-    parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--grid", type=parse_grid, required=True)
-    parser.add_argument("--colors", type=int, default=46)
-    parser.add_argument("--cell-px", type=int, default=36)
-    parser.add_argument("--mirror", action="store_true")
-    parser.add_argument("--no-auto-crop", action="store_true")
-    parser.add_argument("--chart-html", help="optional saved MARD chart HTML")
-    parser.add_argument("--zip-name", default="mard_patterns.zip")
+    parser = argparse.ArgumentParser(description="拼豆小助手 - MARD Bead Pattern Generator")
+    parser.add_argument("--input", help="单张图片路径")
+    parser.add_argument("--input-dir", help="图片目录（批量处理）")
+    parser.add_argument("--output-dir", required=True, help="输出目录")
+    parser.add_argument("--grid", type=parse_grid, required=True, help="网格尺寸，如 104x104")
+    parser.add_argument("--colors", type=int, default=46, help="颜色数量 (默认: 46)")
+    parser.add_argument("--cell-px", type=int, default=36, help="单元格像素大小 (默认: 36)")
+    parser.add_argument("--mirror", action="store_true", help="导出镜像版本")
+    parser.add_argument("--no-auto-crop", action="store_true", help="禁用自动裁切")
+    parser.add_argument("--chart-html", help="本地 MARD 色卡 HTML")
+    parser.add_argument("--zip-name", default="mard_patterns.zip", help="ZIP 文件名")
     args = parser.parse_args()
+    
     if not args.input and not args.input_dir:
-        parser.error("provide --input or --input-dir")
+        parser.error("请提供 --input 或 --input-dir")
+    
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    
     palette = load_palette(args.chart_html)
     outputs: list[Path] = []
+    
     for index, path in enumerate(input_files(args), 1):
         im = Image.open(path).convert("RGB")
         prepared = subject_crop(im, args.grid, not args.no_auto_crop)
         grid, codes, colors = quantize_to_mard(prepared, args.grid, args.colors, palette)
         variants = [False, True] if args.mirror else [False]
+        
         for mirror in variants:
             suffix = "mirror" if mirror else "normal"
             cols, rows = args.grid
@@ -227,12 +232,14 @@ def main() -> int:
             output = out_dir / f"{index:02d}_{path.stem}_{cols}x{rows}_{suffix}_MARD.png"
             sheet.save(output, optimize=True)
             outputs.append(output)
-            print(output)
+            print(f"✓ {output}")
+    
     zip_path = out_dir / args.zip_name
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
         for output in outputs:
             zf.write(output, output.name)
-    print(zip_path)
+    
+    print(f"\n📦 ZIP: {zip_path}")
     return 0
 
 

@@ -5,3 +5,6 @@ dist/
 out/
 tmp/
 *.zip
+venv/
+.venv/
+*.egg-info/

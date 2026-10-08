@@ -1,7 +1,7 @@
 {
-  "name": "mard-bead-pattern-skill",
+  "name": "duwei-bead-pattern-assistant",
   "version": "1.0.0",
-  "description": "MARD Bead Pattern Skill - 将图片转换为专业拼豆图纸",
+  "description": "拼豆小助手 - MARD Bead Pattern Generator | 将图片转换为专业拼豆图纸",
   "main": "mard-bead-pattern/scripts/mard_pattern_generator.py",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,11 +15,21 @@
     "pattern",
     "拼豆",
     "fuse bead",
-    "杜维"
+    "perler",
+    "hama",
+    "杜维",
+    "duwei"
   ],
   "author": "杜维",
   "license": "MIT",
-  "original-repo": "https://github.com/jiahao31530-crypto/mard-bead-pattern-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wdu496132-rgb/duwei-bead-pattern-assistant.git"
+  },
+  "homepage": "https://github.com/wdu496132-rgb/duwei-bead-pattern-assistant#readme",
+  "bugs": {
+    "url": "https://github.com/wdu496132-rgb/duwei-bead-pattern-assistant/issues"
+  },
   "dependencies": {},
   "devDependencies": {}
 }
