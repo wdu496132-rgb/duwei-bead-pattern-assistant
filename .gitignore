@@ -7,4 +7,3 @@ tmp/
 *.zip
 venv/
 .venv/
-*.egg-info/

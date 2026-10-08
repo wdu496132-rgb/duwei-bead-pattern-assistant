@@ -2,7 +2,6 @@
 """
 MARD Bead Pattern Generator - 拼豆小助手
 作者：杜维
-来源：https://github.com/wdu496132-rgb/duwei-bead-pattern-assistant
 """
 from __future__ import annotations
 
