@@ -1,0 +1,25 @@
+{
+  "name": "mard-bead-pattern-skill",
+  "version": "1.0.0",
+  "description": "MARD Bead Pattern Skill - 将图片转换为专业拼豆图纸",
+  "main": "mard-bead-pattern/scripts/mard_pattern_generator.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "python mard-bead-pattern/scripts/mard_pattern_generator.py"
+  },
+  "keywords": [
+    "agnes",
+    "skill",
+    "mard",
+    "bead",
+    "pattern",
+    "拼豆",
+    "fuse bead",
+    "杜维"
+  ],
+  "author": "杜维",
+  "license": "MIT",
+  "original-repo": "https://github.com/jiahao31530-crypto/mard-bead-pattern-skill",
+  "dependencies": {},
+  "devDependencies": {}
+}
